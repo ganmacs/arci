@@ -14,9 +14,9 @@ module Aric
 
     def run
       o, e, s = Open3.capture3("osascript #{script_file_path}.js")
-      p o
-      p e
-      p s
+      p o, e, s
+      raise e unless s.success?
+      o
     end
 
     private
@@ -26,7 +26,7 @@ module Aric
     end
 
     def script_base_dir
-      @script_base_dir ||= File.expand_path('../../../assets', __FILE__)
+      @script_base_dir ||= File.expand_path('../../../scripts', __FILE__)
     end
   end
 end

@@ -1,4 +1,5 @@
 require 'aric/api_handler'
+require 'hashie'
 
 module Aric
   class Command
@@ -9,6 +10,7 @@ module Aric
     end
 
     def call
+      # p a.c
       handler.run(job.to_sym)
     end
 
