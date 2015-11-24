@@ -4,7 +4,12 @@ module Aric
   module Resource
     class Base
       def initialize(resource)
-        @resource = Hashie::Mash.new(resource)
+        propeties = resource.delete('properties')
+        @resource = Hashie::Mash.new(resource.merge(propeties))
+      end
+
+      def type
+        @resource.class
       end
 
       def method_missing(method_name, *args, &block)

@@ -1,6 +1,7 @@
 require 'json'
 require 'aric/api/base'
 require 'aric/resource/track'
+require 'aric/resource/playlist'
 require 'pp'
 
 module Aric
@@ -28,14 +29,13 @@ module Aric
 
       def current_track(opt = {})
         track = run(:current_track)
-        ::Aric::Resource::Track.new(JSON.parse(track))
+        pp ::Aric::Resource::Track.new(JSON.parse(track))
         # p tack.name
       end
 
       def current_playlist(opt = {})
         playlist = run(:current_playlist)
-        pp JSON.parse(playlist)
-        p
+        pp ::Aric::Resource::Playlist.new(JSON.parse(playlist))
       end
 
       def current_playlist_tracks(opt = {})
