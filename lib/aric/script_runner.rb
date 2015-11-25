@@ -13,16 +13,18 @@ module Aric
     end
 
     def run
-      o, e, s = Open3.capture3("osascript #{script_file_path}.js")
-      p o, e, s
-      raise e unless s.success?
-      o
+      stdio, stderr, status = Open3.capture3("osascript #{script_file_path}")
+      puts nil, '<============================================================ DEBUG OUTPUT START HERE'
+      p stdio, stderr, status
+      puts '<============================================================ DEBUG OUTPUT CLOSE HERE', nil
+      raise stderr unless status.success?
+      stdio
     end
 
     private
 
     def script_file_path
-      "#{script_base_dir}/#{@file_path}"
+      "#{script_base_dir}/#{@file_path}.js"
     end
 
     def script_base_dir

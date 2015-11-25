@@ -13,8 +13,8 @@ module Aric
       end
 
       def method_missing(method_name, *args, &block)
-        if @track.respond_to?(method_name)
-          @track.send(method_name, *args, &block)
+        if @resource.respond_to?(method_name)
+          @resource.send(method_name, *args, &block)
         else
           super
         end
