@@ -1,5 +1,6 @@
 var app = Application("iTunes");
 var playlist = app.currentPlaylist();
+
 JSON.stringify({
   class: playlist.class(),
   container: playlist.container(),

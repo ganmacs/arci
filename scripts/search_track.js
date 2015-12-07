@@ -1,7 +1,5 @@
 var app = Application("iTunes");
-var track = app.tracks().find(function(x) {
-  return x.name() == "オレンジ";
-});
+var track = app.playlists().find(function(x) { return x.name() == "オレンジ"; });
 
 JSON.stringify({
   class: track.class(),

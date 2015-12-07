@@ -1,5 +1,5 @@
-app = Application("iTunes");
-tracks_in_playlist = app.currentPlaylist().tracks().map(function(track){
+var app = Application("iTunes");
+var tracks_in_playlist = app.currentPlaylist().tracks().map(function(track){
   var tmp = {
     class: track.class(),
     container: track.container(),

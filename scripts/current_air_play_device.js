@@ -1,5 +1,6 @@
-app = Application("iTunes");
-track = app.currentAirPlayDevices();
+var app = Application("iTunes");
+var track = app.currentAirPlayDevices();
+
 JSON.stringify({
   active: track.active(),
   available: track.available(),

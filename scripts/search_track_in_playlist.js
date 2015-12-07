@@ -1,2 +1,2 @@
 var app = Application("iTunes");
-app.play();
+var track = app.search
