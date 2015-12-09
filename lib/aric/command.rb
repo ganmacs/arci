@@ -10,14 +10,13 @@ module Aric
     end
 
     def call
-      # p a.c
       handler.run(job.to_sym)
     end
 
     private
 
     def job
-      p @args.first or raise JobNameRequired
+      @args.first or raise JobNameRequired
     end
 
     def handler
