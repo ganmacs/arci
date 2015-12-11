@@ -14,11 +14,15 @@ module Aric
       when '--list'
         puts handler.list
       else
-        puts handler.run(job.to_sym)
+        puts handler.run(job.to_sym, values: values)
       end
     end
 
     private
+
+    def values
+      @values ||= @args.drop(1)
+    end
 
     def job
       @job ||= (@args.first or raise JobNameRequired)

@@ -9,7 +9,7 @@ module Aric
       private
 
       def run(job_name, opt = {})
-        ScriptRunner.run(job_name.to_s)
+        ScriptRunner.run(job_name.to_s, opt)
       end
 
       def build_playlist(json)
@@ -22,7 +22,7 @@ module Aric
 
       def build_tracks(json)
         json.map do |e|
-          build_playlist
+          build_track(e)
         end
       end
 
