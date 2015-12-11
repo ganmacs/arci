@@ -6,22 +6,21 @@ module Aric
       def play(opt = {})
         run(:play)
       end
+      alias_method :start, :play
 
       def pause(opt = {})
         run(:pause)
       end
+      alias_method :stop, :pause
 
       def resume(opt = {})
-        run(:resume)
-      end
-
-      def stop(opt = {})
         run(:resume)
       end
 
       def back_track(opt = {})
         run(:back_track)
       end
+      alias_method :back, :back_track
 
       def previous_track(opt = {})
         run(:previous_track)
@@ -30,6 +29,7 @@ module Aric
       def next_track(opt = {})
         run(:next_track)
       end
+      alias_method :next, :next_track
 
       def fast_forward(opt = {})
         run(:fast_forward)
