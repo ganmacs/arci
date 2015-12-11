@@ -12,12 +12,24 @@ module Aric
         ScriptRunner.run(job_name.to_s)
       end
 
-      def build_playlist(payload)
-        ::Aric::Resource::Playlist.new(JSON.parse(payload))
+      def build_playlist(json)
+        ::Aric::Resource::Playlist.new(json)
       end
 
-      def build_track(payload)
-        ::Aric::Resource::Track.new(JSON.parse(payload))
+      def build_track(json)
+        ::Aric::Resource::Track.new(json)
+      end
+
+      def build_tracks(json)
+        json.map do |e|
+          build_playlist
+        end
+      end
+
+      private
+
+      def jsonify(body)
+        JSON.parse(body)
       end
     end
   end

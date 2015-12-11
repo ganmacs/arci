@@ -37,19 +37,19 @@ module Aric
 
       def current_track(opt = {})
         t = run(:current_track)
-        build_track(t)
+        build_track(jsonify(t))
       end
       alias_method :track, :current_track
 
       def current_playlist(opt = {})
         pl = run(:current_playlist)
-        build_playlist(pl)
+        build_playlist(jsonify(pl))
       end
       alias_method :playlist, :current_playlist
 
       def current_playlist_tracks(opt = {})
         ts = run(:current_playlist_tracks)
-        ts.map { |t| build_track(t) }
+        build_tracks(jsonify(ts))
       end
 
       def search(opt = {})
