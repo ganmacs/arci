@@ -13,12 +13,12 @@ module Aric
     end
 
     def run(args = '')
-      stdio, stderr, status = Open3.capture3("osascript -l JavaScript #{script_file_path} #{args}")
+      stdout, stderr, status = Open3.capture3("osascript -l JavaScript #{script_file_path} #{args}")
       puts nil, '<============================================================ DEBUG OUTPUT START HERE'
-      p stdio, stderr, status
+      p stdout, stderr, status
       puts '<============================================================ DEBUG OUTPUT CLOSE HERE', nil
       raise stderr unless status.success?
-      stdio
+      stdout
     end
 
     private
