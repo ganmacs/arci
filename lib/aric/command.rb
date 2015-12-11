@@ -11,7 +11,8 @@ module Aric
 
     def call
       case job
-      when '--list' then handler.list
+      when '--list'
+        puts handler.list
       else
         handler.run(job.to_sym)
       end

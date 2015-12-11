@@ -6,14 +6,13 @@ module Aric
     class JobNotFound < StandardError; end
 
     def run(job_name, opt = {})
-      @job = job_name
       raise JobNotFound unless include?(job_name)
-      job_class.new.send(job_name, opt)
+      find_by(job_name).new.send(job_name, opt)
     end
 
-    # Print runnable job list
+    # Return runnable job list
     def list
-      puts jobs
+      jobs
     end
 
     def include?(job)
@@ -22,15 +21,18 @@ module Aric
 
     private
 
-    def jobs
-      @jobs ||= job_classes.flat_map do |e|
-        e.public_instance_methods(false)
+    # Return Job class has job_name
+    #
+    # job_name [String]
+    def find_by(job_name)
+      job_classes.find do |e|
+        e.public_instance_methods(false).include?(job_name)
       end
     end
 
-    def job_class
-      job_classes.find do |e|
-        e.public_instance_methods(false).include?(@job)
+    def jobs
+      @jobs ||= job_classes.flat_map do |e|
+        e.public_instance_methods(false)
       end
     end
 
