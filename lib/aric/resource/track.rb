@@ -25,6 +25,10 @@ module Aric
           find_by(:all)
         end
       end
+
+      def to_s
+        '%s / %s / %s' % [name, artist, album]
+      end
     end
   end
 end

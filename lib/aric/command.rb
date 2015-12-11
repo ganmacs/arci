@@ -14,7 +14,7 @@ module Aric
       when '--list'
         puts handler.list
       else
-        handler.run(job.to_sym)
+        puts handler.run(job.to_sym)
       end
     end
 
