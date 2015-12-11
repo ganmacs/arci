@@ -39,11 +39,13 @@ module Aric
         t = run(:current_track)
         build_track(t)
       end
+      alias_method :track, :current_track
 
       def current_playlist(opt = {})
         pl = run(:current_playlist)
         build_playlist(pl)
       end
+      alias_method :playlist, :current_playlist
 
       def current_playlist_tracks(opt = {})
         ts = run(:current_playlist_tracks)
