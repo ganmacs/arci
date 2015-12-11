@@ -4,7 +4,7 @@ require 'aric/resource/track'
 require 'aric/resource/playlist'
 
 module Aric
-  module Api
+  module Job
     class Base
       private
 

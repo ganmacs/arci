@@ -1,7 +1,7 @@
-require 'aric/api/base'
+require 'aric/job/base'
 
 module Aric
-  module Api
+  module Job
     class Player < Base
       def activate(opt = {})
         run(:activate)

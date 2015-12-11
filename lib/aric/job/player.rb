@@ -1,8 +1,7 @@
-require 'json'
-require 'aric/api/base'
+require 'aric/job/base'
 
 module Aric
-  module Api
+  module Job
     class Player < Base
       def play(opt = {})
         run(:play)
@@ -55,11 +54,6 @@ module Aric
         t = run(:search)
         build_playlist(t)
       end
-
-      # def current_air_play_device(opt = {})
-      #   track = run(:current_air_play_device)
-      #   pp JSON.parse(track)
-      # end
     end
   end
 end

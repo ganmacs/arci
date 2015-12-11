@@ -1,4 +1,4 @@
-require 'aric/api_handler'
+require 'aric/job_handler'
 require 'hashie'
 
 module Aric
@@ -24,7 +24,7 @@ module Aric
     end
 
     def handler
-      @handler ||= ApiHander.new
+      @handler ||= JobHander.new
     end
   end
 end

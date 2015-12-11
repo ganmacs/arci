@@ -1,40 +1,41 @@
-require 'aric/api'
+require 'aric/job/player'
+require 'aric/job/util'
 
 module Aric
-  class ApiHander
+  class JobHander
     class JobNotFound < StandardError; end
 
     def run(job_name, opt = {})
       @job = job_name
       raise JobNotFound unless include?(job_name)
-      api_class.new.send(job_name, opt)
+      job_class.new.send(job_name, opt)
     end
 
     # Print runnable job list
     def list
-      puts api_methods
+      puts jobs
     end
 
     def include?(job)
-      api_methods.include?(job)
+      jobs.include?(job)
     end
 
     private
 
-    def api_methods
-      @api_methods ||= api_classes.flat_map do |e|
+    def jobs
+      @jobs ||= job_classes.flat_map do |e|
         e.public_instance_methods(false)
       end
     end
 
-    def api_class
-      api_classes.find do |e|
+    def job_class
+      job_classes.find do |e|
         e.public_instance_methods(false).include?(@job)
       end
     end
 
-    def api_classes
-      @api_class ||= Api.constants.tap { |e| e.delete(:Base) }.map { |e| Api.const_get(e) }
+    def job_classes
+      @job_class ||= Job.constants.tap { |e| e.delete(:Base) }.map { |e| Job.const_get(e) }
     end
   end
 end
