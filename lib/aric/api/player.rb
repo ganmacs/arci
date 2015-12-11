@@ -1,8 +1,5 @@
 require 'json'
 require 'aric/api/base'
-require 'aric/resource/track'
-require 'aric/resource/playlist'
-require 'pp'
 
 module Aric
   module Api
@@ -13,6 +10,14 @@ module Aric
 
       def pause(opt = {})
         run(:pause)
+      end
+
+      def resume(opt = {})
+        run(:resume)
+      end
+
+      def stop(opt = {})
+        run(:resume)
       end
 
       def back_track(opt = {})
@@ -27,34 +32,34 @@ module Aric
         run(:next_track)
       end
 
+      def fast_forward(opt = {})
+        run(:fast_forward)
+      end
+
       def current_track(opt = {})
-        track = run(:current_track)
-        pp ::Aric::Resource::Track.new(JSON.parse(track))
-        # p tack.name
+        t = run(:current_track)
+        build_track(t)
       end
 
       def current_playlist(opt = {})
-        playlist = run(:current_playlist)
-        pp ::Aric::Resource::Playlist.new(JSON.parse(playlist))
+        pl = run(:current_playlist)
+        build_playlist(pl)
       end
 
       def current_playlist_tracks(opt = {})
-        playlist = run(:current_playlist_tracks)
-        pp JSON.parse(playlist)
+        ts = run(:current_playlist_tracks)
+        ts.map { |t| build_track(t) }
+      end
+
+      def search(opt = {})
+        t = run(:search)
+        build_playlist(t)
       end
 
       # def current_air_play_device(opt = {})
       #   track = run(:current_air_play_device)
       #   pp JSON.parse(track)
       # end
-
-      def resume(opt = {})
-        run(:resume)
-      end
-
-      def stop(opt = {})
-        run(:resume)
-      end
     end
   end
 end

@@ -10,13 +10,17 @@ module Aric
     end
 
     def call
-      handler.run(job.to_sym)
+      case job
+      when '--list' then handler.list
+      else
+        handler.run(job.to_sym)
+      end
     end
 
     private
 
     def job
-      @args.first or raise JobNameRequired
+      @job ||= (@args.first or raise JobNameRequired)
     end
 
     def handler

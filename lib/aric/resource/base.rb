@@ -6,6 +6,12 @@ module Aric
       def initialize(resource)
         propeties = resource.delete('properties')
         @resource = Hashie::Mash.new(resource.merge(propeties))
+
+        @resource.select { |_, v| [TrueClass, FalseClass].include?(v) }.each do |k, v|
+          class_eval do
+            define_method("#{k}?") { v }
+          end
+        end
       end
 
       def type

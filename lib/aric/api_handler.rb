@@ -10,6 +10,11 @@ module Aric
       api_class.new.send(job_name, opt)
     end
 
+    # Print runnable job list
+    def list
+      puts api_methods
+    end
+
     def include?(job)
       api_methods.include?(job)
     end

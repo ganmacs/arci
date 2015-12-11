@@ -1,4 +1,7 @@
+require 'json'
 require 'aric/script_runner'
+require 'aric/resource/track'
+require 'aric/resource/playlist'
 
 module Aric
   module Api
@@ -6,12 +9,15 @@ module Aric
       private
 
       def run(job_name, opt = {})
-        @job_name = job_name
-        ScriptRunner.run(path_name)
+        ScriptRunner.run(job_name.to_s)
       end
 
-      def path_name
-        @job_name.to_s
+      def build_playlist(payload)
+        ::Aric::Resource::Playlist.new(JSON.parse(payload))
+      end
+
+      def build_track(payload)
+        ::Aric::Resource::Track.new(JSON.parse(payload))
       end
     end
   end
