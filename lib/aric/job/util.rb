@@ -16,12 +16,12 @@ module Aric
         run(:unlove)
       end
 
-      def playlist_love
-        run(:playlist_love)
+      def love_playlist
+        run(:love_playlist)
       end
 
       def playlist_unlove
-        run(:playlist_unlove)
+        run(:unlove_playlist)
       end
     end
   end

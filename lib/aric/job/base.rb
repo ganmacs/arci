@@ -32,8 +32,6 @@ module Aric
         end
       end
 
-      private
-
       def jsonify(body)
         JSON.parse(body)
       end
