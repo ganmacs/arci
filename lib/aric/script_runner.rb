@@ -18,7 +18,7 @@ module Aric
       p stdout, stderr, status
       puts '<============================================================ DEBUG OUTPUT CLOSE HERE', nil
       raise stderr unless status.success?
-      stdout
+      stdout.strip
     end
 
     private

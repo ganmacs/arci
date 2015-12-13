@@ -52,6 +52,17 @@ module Aric
         build_tracks(jsonify(ts))
       end
 
+      def player_state(v = [])
+        run(:player_state)
+      end
+      alias_method :state, :player_state
+
+      %w(playing paused stopped).each do |name|
+        define_method("#{name}?") do
+          player_state == name
+        end
+      end
+
       # def search_track_in_playlist(v = [])
       #   t = run(:search_track_in_playlist)
       #   build_tracks(t)
