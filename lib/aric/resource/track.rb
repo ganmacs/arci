@@ -38,7 +38,7 @@ module Aric
       private
 
       def player
-        @player ||= Aric::Job::Player.new
+        @player ||= Aric::Job::Player.instance
       end
     end
   end

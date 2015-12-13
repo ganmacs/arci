@@ -1,4 +1,5 @@
 require 'json'
+require 'singleton'
 require 'aric/script_runner'
 require 'aric/resource/track'
 require 'aric/resource/playlist'
@@ -6,9 +7,11 @@ require 'aric/resource/playlist'
 module Aric
   module Job
     class Base
+      include Singleton
+
       class << self
         def run(job_name, *args)
-          new.send(job_name, args)
+          instance.send(job_name, *args)
         end
       end
 
