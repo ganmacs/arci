@@ -1,5 +1,5 @@
+require 'optparse'
 require 'aric/job_handler'
-require 'hashie'
 
 module Aric
   class Command
@@ -10,9 +10,9 @@ module Aric
     end
 
     def call
-      case job
-      when '--list'
-        puts handler.list
+      case
+      when list?
+        puts JobHandler.jobs
       else
         puts handler.run(*values)
       end
@@ -29,7 +29,26 @@ module Aric
     end
 
     def handler
-      @handler ||= JobHander.new(job)
+      @handler ||= JobHandler.new(job)
+    end
+
+    def list?
+      options['list']
+    end
+
+    def options
+      @options ||= option_parser.getopts(@argv)
+    end
+
+    def option_parser
+      @optin_parser ||= OptionParser.new do |opt|
+        opt.version = Aric::VERSION
+        opt.banner = 'Usage: aric [options]'
+
+        opt.separator 'Options:'
+        opt.on('-l', '--list', 'show available methods')
+        opt.on('-d', 'demonize')
+      end
     end
   end
 end
