@@ -2,7 +2,7 @@ require 'aric/job/base'
 
 module Aric
   module Job
-    class Player < Base
+    class Util < Base
       def activate
         run(:activate)
       end

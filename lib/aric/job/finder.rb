@@ -2,10 +2,21 @@ require 'aric/job/base'
 
 module Aric
   module Job
-    class Searcher < Base
+    class Finder < Base
       def find_track(v)
         t = run(:find_track, v)
         build_tracks(jsonify(t))
+      end
+
+      # Too Slow Command
+      def find_all
+        ts = run(:find_all)
+        build_tracks(jsonify(ts))
+      end
+
+      def find_playlist(title)
+        pl = run(:find_playlist, title)
+        build_playlist(jsonify(pl))
       end
 
       %w(albums all artists composers displayed songs).each do |n|

@@ -1,7 +1,4 @@
-require 'aric/job/player'
-require 'aric/job/volume'
-require 'aric/job/util'
-require 'aric/job/finder'
+require 'aric/job'
 
 module Aric
   class JobHandler
