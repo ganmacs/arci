@@ -1,4 +1,5 @@
 require 'aric/resource/base'
+require 'aric/job/player'
 
 module Aric
   module Resource
@@ -26,8 +27,18 @@ module Aric
         end
       end
 
+      def play
+        player.play(pesistendID)
+      end
+
       def to_s
         '%s / %s / %s' % [name, artist, album]
+      end
+
+      private
+
+      def player
+        @player ||= Aric::Job::Player.new
       end
     end
   end

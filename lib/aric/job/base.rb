@@ -14,8 +14,8 @@ module Aric
 
       private
 
-      def run(job_name, opt = {})
-        ScriptRunner.run(job_name.to_s, opt)
+      def run(job_name, *opt)
+        ScriptRunner.run(job_name.to_s, *opt)
       end
 
       def build_playlist(json)

@@ -3,8 +3,8 @@ require 'aric/job/base'
 module Aric
   module Job
     class Player < Base
-      def play
-        run(:play)
+      def play(id = nil)
+        run(:play, id)
       end
       alias_method :start, :play
 
