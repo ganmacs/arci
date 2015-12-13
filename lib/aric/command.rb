@@ -14,7 +14,7 @@ module Aric
       when '--list'
         puts handler.list
       else
-        puts handler.run(job.to_sym, values: values)
+        puts handler.run(*values)
       end
     end
 
@@ -29,7 +29,7 @@ module Aric
     end
 
     def handler
-      @handler ||= JobHander.new
+      @handler ||= JobHander.new(job)
     end
   end
 end

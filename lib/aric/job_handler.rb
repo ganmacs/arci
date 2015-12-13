@@ -1,12 +1,18 @@
 require 'aric/job/player'
+require 'aric/job/volume'
 require 'aric/job/util'
 
 module Aric
   class JobHander
     class JobNotFound < StandardError; end
 
-    def run(job_name, opt = {})
-      find_by(job_name).new.send(job_name, opt)
+    def initialize(job_name)
+      @job_name = job_name.to_sym
+    end
+
+    def run(*args)
+      # check argument number
+      job_class.run(@job_name, *args)
     end
 
     # Return runnable job list
@@ -17,18 +23,13 @@ module Aric
     private
 
     # Return Job class that has job_name method
-    #
-    # job_name [String]
-    def find_by(job_name)
-      if include?(job_name)
-        job_class_hash.find { |_, v| v.include?(job_name) }.first
-      else
-        raise JobNotFound
-      end
+    def job_class
+      raise JobNotFound if job_not_found?
+      job_class_hash.find { |_, v| v.include?(@job_name) }.first
     end
 
-    def include?(job)
-      jobs.include?(job)
+    def job_not_found?
+      !jobs.include?(@job_name)
     end
 
     def jobs

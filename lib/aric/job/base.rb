@@ -6,6 +6,12 @@ require 'aric/resource/playlist'
 module Aric
   module Job
     class Base
+      class << self
+        def run(job_name, *args)
+          new.send(job_name, *args)
+        end
+      end
+
       private
 
       def run(job_name, opt = {})
