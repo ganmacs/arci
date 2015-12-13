@@ -63,6 +63,16 @@ module Aric
         end
       end
 
+      def player_position
+        run(:player_position)
+      end
+      alias_method :position, :player_position
+
+      def set_player_position(pos)
+        run(:set_player_position, pos)
+      end
+      alias_method :set_position, :set_player_position
+
       # def search_track_in_playlist(v = [])
       #   t = run(:search_track_in_playlist)
       #   build_tracks(t)
