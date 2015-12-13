@@ -3,16 +3,17 @@ require 'open3'
 module Aric
   class ScriptRunner
     class << self
-      def run(file_name, args = '')
+      def run(file_name, args = [])
         new(file_name).run(args)
       end
     end
 
     def initialize(file_name)
-      @file_name = file_name
+      @file_name = file_name.to_s
     end
 
-    def run(args = '')
+    def run(args = [])
+      args = Array(args).join(' ')
       stdout, stderr, status = Open3.capture3("osascript -l JavaScript #{script_file_path} #{args}")
       puts nil, '<============================================================ DEBUG OUTPUT START HERE'
       p stdout, stderr, status

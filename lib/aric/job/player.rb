@@ -72,21 +72,6 @@ module Aric
         run(:set_player_position, pos)
       end
       alias_method :set_position, :set_player_position
-
-      # def search_track_in_playlist(v = [])
-      #   t = run(:search_track_in_playlist)
-      #   build_tracks(t)
-      # end
-
-      # def search(v = [])
-      #   ts = run(:search_track)
-      #   build_tracks(jsonify(ts))
-      # end
-
-      def search_track(v = [])
-        ts = run(:search_track)
-        build_tracks(jsonify(ts))
-      end
     end
   end
 end
