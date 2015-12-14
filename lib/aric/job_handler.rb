@@ -27,7 +27,7 @@ module Aric
     end
 
     def run(*args)
-      # check argument number
+      # Check argument number
       job_class.run(@job_name, *args)
     end
 

@@ -13,27 +13,28 @@ module Aric
       case
       when list?
         puts JobHandler.jobs
+      when play?
       else
-        puts handler.run(*values)
+        puts JobHandler.new(job).run(*values)
       end
     end
 
     private
 
     def values
-      @values ||= @args.drop(1)
+      @args.drop(1)
     end
 
     def job
-      @job ||= (@args.first or raise JobNameRequired)
-    end
-
-    def handler
-      @handler ||= JobHandler.new(job)
+      @args.first or raise JobNameRequired
     end
 
     def list?
       options['list']
+    end
+
+    def play?
+      options['play']
     end
 
     def options
@@ -47,7 +48,8 @@ module Aric
 
         opt.separator 'Options:'
         opt.on('-l', '--list', 'show available methods')
-        opt.on('-d', 'demonize')
+        opt.on('-p', '--play', 'play found tracks')
+        # opt.on('-d', 'demonize')
       end
     end
   end
