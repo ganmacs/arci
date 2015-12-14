@@ -23,7 +23,7 @@ module Aric
       end
 
       def to_s
-        name
+        "%s / %s" % [name, persistentID]
       end
     end
   end

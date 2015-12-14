@@ -32,7 +32,7 @@ module Aric
       end
 
       def to_s
-        '%s / %s / %s' % [name, artist, album]
+        '%s / %s / %s / %s' % [name, artist, album, persistentID]
       end
 
       private
