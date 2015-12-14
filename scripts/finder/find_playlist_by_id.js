@@ -1,7 +1,7 @@
 function run(argv) {
   var app = Application("iTunes");
-  var playlist =  app.playlists().find(function(x){
-    return x.name() == argv[0];
+  var playlist = app.playlists().find(function(x){
+    return x.persistentID() == argv[0];
   });
 
   return JSON.stringify({

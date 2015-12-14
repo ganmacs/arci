@@ -8,8 +8,12 @@ module Aric
 
         def find_with_condition(cond)
           case
+          when cond[:id]
+            finder.find_playlist_by_id(cond[:id]).first
           when cond[:name]
-            finder.find_track_by_songs(cond[:name]).first
+            finder.find_playlists(cond[:name]).first
+          when cond[:loved]
+            finder.find_loved_playlists(cond[:loved])
           end
         end
 

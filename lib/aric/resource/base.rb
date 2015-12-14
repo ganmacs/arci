@@ -36,12 +36,8 @@ module Aric
       end
 
       def initialize(resource)
-        properties = resource.delete('properties')
-        @resource = if properties
-                      Hashie::Mash.new(resource.merge(properties))
-                    else
-                      Hashie::Mash.new(resource)
-                    end
+        properties = resource.delete('properties') || {}
+        @resource = Hashie::Mash.new(resource.merge(properties))
 
         @resource.select { |_, v| [TrueClass, FalseClass].include?(v.class) }.each do |k, v|
           self.class.class_eval do

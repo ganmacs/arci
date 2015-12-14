@@ -21,10 +21,6 @@ module Aric
         ScriptRunner.run(job_name.to_s, *opt)
       end
 
-      def build_playlist(json)
-        ::Aric::Resource::Playlist.new(json)
-      end
-
       def build_track(json)
         ::Aric::Resource::Track.new(json)
       end
@@ -32,6 +28,16 @@ module Aric
       def build_tracks(json)
         json.map do |e|
           build_track(e)
+        end
+      end
+
+      def build_playlist(json)
+        ::Aric::Resource::Playlist.new(json)
+      end
+
+      def build_playlists(json)
+        json.map do |e|
+          build_playlist(e)
         end
       end
 

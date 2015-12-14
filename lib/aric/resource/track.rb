@@ -10,18 +10,20 @@ module Aric
           case
           when cond[:id]
             finder.find_track_by_id(cond[:id])
+          when cond[:loved]
+            finder.find_loved_tracks(cond[:loved])
           when cond[:name]
-            finder.find_track_by_songs(cond[:name]).first
+            finder.find_tracks_by_songs(cond[:name]).first
           when cond[:album]
-            finder.find_track_by_albums(cond[:album]).first
+            finder.find_tracks_by_albums(cond[:album]).first
           when cond[:artists]
-            finder.find_track_by_artists(cond[:artists]).first
+            finder.find_tracks_by_artists(cond[:artists]).first
           end
         end
 
         # Maybe Too Slow
         def find_all
-          finder.find_all_tracks
+          finder.finder_all_tracks
         end
       end
 
