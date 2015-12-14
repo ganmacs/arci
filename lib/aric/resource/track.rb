@@ -1,34 +1,32 @@
 require 'aric/resource/base'
-require 'aric/job/player'
 
 module Aric
   module Resource
     class Track < Base
       class << self
-        def find_by(cond)
-          if codn.is_a?(Hash)
-            f = Hash[*cond.first]
-            f.key
+        private
 
-            open("#{script_base_dir}/#{template_path}", 'r') do |f|
-              f.each { |line| body << line }
-            end
-
-            args.each do |key, val|
-              body.gsub!("#\{#{key}\}", val)
-            end
-          elsif cond == :all
-          else
+        def find_with_condition(cond)
+          case
+          when cond[:id]
+            finder.find_track_by_id(cond[:id])
+          when cond[:name]
+            finder.find_track_by_songs(cond[:name]).first
+          when cond[:album]
+            finder.find_track_by_albums(cond[:album]).first
+          when cond[:artists]
+            finder.find_track_by_artists(cond[:artists]).first
           end
         end
 
-        def all
-          find_by(:all)
+        # Maybe Too Slow
+        def find_all
+          finder.find_all_tracks
         end
       end
 
       def play
-        player.play(pesistendID)
+        player.play(persistentID)
       end
 
       def to_s

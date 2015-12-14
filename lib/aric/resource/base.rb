@@ -1,8 +1,40 @@
 require 'hashie'
+require 'aric/job'
 
 module Aric
   module Resource
     class Base
+      class << self
+        def find_by(cond)
+          raise ArgumentError if cond.nil?
+          if cond.is_a?(Hash)
+            find_with_condition(cond)
+          elsif cond == :all
+            find_all
+          else
+            raise ArgumentError
+          end
+        end
+
+        def all
+          find_by(:all)
+        end
+
+        private
+
+        def find_all
+          raise NotImplementedError
+        end
+
+        def find_with_condition(cond)
+          raise NotImplementedError
+        end
+
+        def finder
+          @finder ||= Aric::Job::Finder.instance
+        end
+      end
+
       def initialize(resource)
         properties = resource.delete('properties')
         @resource = if properties

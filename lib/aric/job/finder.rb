@@ -8,15 +8,15 @@ module Aric
         build_tracks(jsonify(t))
       end
 
-      # Too Slow Command
-      def find_all
-        ts = run(:find_all)
-        build_tracks(jsonify(ts))
+      def find_track_by_id(id)
+        t = run(:find_track_by_id, id)
+        build_track(jsonify(t))
       end
 
-      def find_playlist(title)
-        pl = run(:find_playlist, title)
-        build_playlist(jsonify(pl))
+      # Too Slow Command
+      def find_all_tracks
+        ts = run(:find_all_tracks)
+        build_tracks(jsonify(ts))
       end
 
       %w(albums all artists composers displayed songs).each do |n|
@@ -25,6 +25,16 @@ module Aric
           t = run('find_track_by', n, v)
           build_tracks(jsonify(t))
         end
+      end
+
+      def find_playlist(title)
+        pl = run(:find_playlist, title)
+        build_playlist(jsonify(pl))
+      end
+
+      def find_all_playlists
+        ts = run(:find_all_playlists)
+        build_tracks(jsonify(ts))
       end
 
       private

@@ -1,8 +1,6 @@
 function run(argv) {
   var app = Application("iTunes");
-  var tracks = app.tracks().filter(function (x) {
-    return x.loved();
-  }).map(function(track){
+  var tracks = app.tracks().map(function(track){
     return {
       class: track.class(),
       container: track.container(),
