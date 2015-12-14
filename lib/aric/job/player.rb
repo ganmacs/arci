@@ -3,10 +3,15 @@ require 'aric/job/base'
 module Aric
   module Job
     class Player < Base
-      def play(id = nil)
-        run(:play, id)
+      def play_track(id = nil)
+        run(:play_track, id)
       end
-      alias_method :start, :play
+      alias_method :play, :play_track
+      alias_method :start, :play_track
+
+      def play_playlist(id)
+        run(:play_playlist, id)
+      end
 
       def pause
         run(:pause)
