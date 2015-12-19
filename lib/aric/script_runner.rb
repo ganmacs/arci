@@ -15,10 +15,7 @@ module Aric
     def run(args = [])
       args = Array(args).join(' ')
       stdout, stderr, status = Open3.capture3("osascript -l JavaScript #{script_file_path} #{args}")
-      puts nil, '<============================================================ DEBUG OUTPUT START HERE'
-      p stdout, stderr, status
-      puts '<============================================================ DEBUG OUTPUT CLOSE HERE', nil
-      raise stderr unless status.success?
+      raise "#{stderr} at osascript -l JavaScript #{script_file_path} #{args}" unless status.success?
       stdout.strip
     end
 
