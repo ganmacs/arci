@@ -5,6 +5,11 @@
 
 Awesome Ruby Itunes Client
 
+## Requirements
+
+* OSX Yosemite or higher
+* Ruby 2.2 or higher
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -23,7 +28,49 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Command Line
+
+Show avalable jobs.
+
+```sh
+$ aric --list
+```
+
+Execute jobs as follow.
+
+```sh
+// play trakcs
+$ aric play
+
+// next tracks
+$ aric next
+
+// volume up by 10
+$ aric up 10
+
+// volume up by 10
+$ aric up 10
+
+// show tracks in current playlists
+$ aric current_playlist_tracks
+
+// set state to track love
+$ aric love
+
+// open iTunes
+$ aric activate
+```
+
+Play founded tracks with `-p` option.
+
+```sh
+// play loved tracks
+$ aric -p find_loved_tracks
+
+// play found tracks
+
+$ aric -p find_tracks <track_name>
+```
 
 ## Development
 
