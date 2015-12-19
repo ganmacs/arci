@@ -5,6 +5,14 @@ module Aric
     class JobNotFound < StandardError; end
 
     class << self
+      def play(*args)
+        if args.first && jobs.include?(args.first.to_sym)
+          new(:play_music).run(*args)
+        else
+          raise JobNotFound
+        end
+      end
+
       def jobs
         @jobs ||= job_class_hash.values.flat_map(&:itself)
       end

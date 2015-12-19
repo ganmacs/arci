@@ -3,6 +3,10 @@ require 'aric/job/base'
 module Aric
   module Job
     class Player < Base
+      def play_music(*argv)
+        run(:play_music, argv)
+      end
+
       def play_track(id = nil)
         run(:play_track, id)
       end

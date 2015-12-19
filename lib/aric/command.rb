@@ -14,6 +14,7 @@ module Aric
       when list?
         puts JobHandler.jobs
       when play?
+        JobHandler.play(*@args)
       else
         puts JobHandler.new(job).run(*values)
       end
