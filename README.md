@@ -69,6 +69,24 @@ $ aric -p find_loved_tracks
 $ aric -p find_tracks <track_name>
 ```
 
+### Use As Library
+
+```rb
+require 'aric/resource/track'
+
+tracks = Track.find_by(name: 'Puppy Love')
+track = tracks.first
+
+puts track.name
+
+track.play
+track.stop
+
+require 'aric/job/volume'
+Volume.up 10
+Volume.down 10
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/aric/fork )
