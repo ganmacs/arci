@@ -1,4 +1,5 @@
 require 'open3'
+require 'aric/error/script_execution_error'
 
 module Aric
   class ScriptRunner
@@ -13,13 +14,17 @@ module Aric
     end
 
     def run(args = [])
-      args = Array(args).join(' ')
-      stdout, stderr, status = Open3.capture3("osascript -l JavaScript #{script_file_path} #{args}")
-      raise "#{stderr} in osascript -l JavaScript #{script_file_path} #{args}" unless status.success?
+      @args = Array(args).join(' ')
+      stdout, stderr, status = Open3.capture3(cmd)
+      raise Arci::Error::ScriptExecutionError.new(stderr, cmd) unless status.success?
       stdout.strip
     end
 
     private
+
+    def cmd
+      @cmd ||= "osascript -l JavaScript #{script_file_path} #{@args}"
+    end
 
     def script_file_path
       "#{script_base_dir}/#{@file_name}.js"

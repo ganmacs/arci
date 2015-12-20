@@ -1,22 +1,29 @@
 require 'aric/job'
+require 'aric/error/job_name_required'
+require 'aric/error/job_not_found'
 
 module Aric
   class JobHandler
-    class JobNotFound < StandardError; end
-
     class << self
       def play(*args)
-        if args.first && jobs.include?(args.first.to_sym)
-          new(:play_music).run(*args)
+        case
+        when !args.first
+          raise Aric::Error::JobNameRequired.new
+        when !jobs.include?(args.first.to_sym)
+          raise Aric::Error::JobNotFound.new(args.first)
         else
-          raise JobNotFound
+          new(:play_music).run(*args)
         end
       end
 
+      # Avalable jobs names
+      # @return [Array<Symbol>]
       def jobs
         @jobs ||= job_class_hash.values.flat_map(&:itself)
       end
 
+      # Avalable jobs names and Class that them contain
+      # @return [Hash<Class, Symbol>]
       def job_class_hash
         @job_class_hash ||= job_classes.each_with_object({}) do |c, a|
           a[c] = c.public_instance_methods(false)
@@ -25,6 +32,8 @@ module Aric
 
       private
 
+      # Classes that contain avalable jobs
+      # @return [Job::Base] Job::Base extended class
       def job_classes
         @job_class ||= Job.constants.map { |e| Job.const_get(e) }
       end

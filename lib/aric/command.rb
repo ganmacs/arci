@@ -1,10 +1,11 @@
 require 'optparse'
 require 'aric/job_handler'
+require 'aric/error/job_name_required'
+require 'aric/error/job_not_found'
+require 'aric/error/script_execution_error'
 
 module Aric
   class Command
-    class JobNameRequired < StandardError; end
-
     def initialize(args = ARGV)
       @args = args
     end
@@ -12,28 +13,36 @@ module Aric
     def call
       case
       when list?
-        puts JobHandler.jobs
+        puts job_list
       when play?
-        JobHandler.play(*@args)
-      when id?
-        puts run.map(&:persistentID)
+        play
       else
         puts run
       end
+    rescue Aric::Error::JobNameRequired, Aric::Error::JobNotFound, Aric::Error::ScriptExecutionError => e
+      puts "Error: #{e}"
     end
 
     private
-
-    def run
-      JobHandler.new(job).run(*values)
-    end
 
     def values
       @args.drop(1)
     end
 
     def job
-      @args.first or raise JobNameRequired
+      @args.first or raise Aric::Error::JobNameRequired
+    end
+
+    def run
+      JobHandler.new(job).run(*values)
+    end
+
+    def play
+      JobHandler.play(*@args)
+    end
+
+    def job_list
+      JobHandler.jobs
     end
 
     def list?
@@ -42,10 +51,6 @@ module Aric
 
     def play?
       options['play']
-    end
-
-    def id?
-      options['id']
     end
 
     def options
@@ -60,8 +65,6 @@ module Aric
         opt.separator 'Options:'
         opt.on('-l', '--list', 'show available methods')
         opt.on('-p', '--play', 'play found tracks')
-        opt.on('-i', '--id', 'show only id')
-        # opt.on('-d', 'demonize')
       end
     end
   end
