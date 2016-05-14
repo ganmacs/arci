@@ -7,7 +7,7 @@ module Aric
       end
 
       def to_s
-        "#{@message} in #{cmd}"
+        "#{@message} in #{@cmd}"
       end
     end
   end

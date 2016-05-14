@@ -51,7 +51,7 @@ module Aric
 
     # Return Job class that has job_name method
     def job_class
-      raise JobNotFound if job_not_found?
+      raise Aric::Error::JobNotFound.new(@job_name) if job_not_found?
       JobHandler.job_class_hash.find { |_, v| v.include?(@job_name) }.first
     end
 
