@@ -16,7 +16,7 @@ module Aric
     def run(args = [])
       @args = Array(args).join(' ')
       stdout, stderr, status = Open3.capture3(cmd)
-      raise Arci::Error::ScriptExecutionError.new(stderr, cmd) unless status.success?
+      raise Aric::Error::ScriptExecutionError.new(stderr, cmd) unless status.success?
       stdout.strip
     end
 

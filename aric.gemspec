@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['ganmacs@gmail.com']
 
   spec.summary       = 'Awesome Ruby Ituens Client'
-  spec.homepage      = 'https://github.com/ganmacs/arci'
+  spec.homepage      = 'https://github.com/ganmacs/aric'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = 'bin'
