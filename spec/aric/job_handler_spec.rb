@@ -27,7 +27,7 @@ describe Aric::JobHandler do
 
     context 'passes the Unknown job' do
       let(:job_name) { :unknow }
-      it { expect { subject }.to raise_error Aric::JobHandler::JobNotFound }
+      it { expect { subject }.to raise_error Aric::Error::JobNotFound }
     end
 
     context 'passes the known job' do
